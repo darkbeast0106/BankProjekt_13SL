@@ -8,6 +8,20 @@ namespace BankProjekt_13SL
 {
     public class Bank
     {
+        private class Szamla
+        {
+            string nev;
+            string szamlaszam;
+
+            public Szamla(string nev, string szamlaszam)
+            {
+                this.nev = nev;
+                this.szamlaszam = szamlaszam;
+            }
+
+            public string Szamlaszam { get => szamlaszam; }
+        }
+        private List<Szamla> szamlak = new List<Szamla>();
         // Egy létező számlára pénzt helyez
         public void EgyenlegFeltolt(string szamlaszam, ulong osszeg)
         {
@@ -17,7 +31,17 @@ namespace BankProjekt_13SL
         // Új számlát nyit a megadott névvel, számlaszámmal
         public void UjSzamla(string nev, string szamlaszam)
         {
-            throw new NotImplementedException();
+            foreach (Szamla szamla1 in szamlak)
+            {
+                if (szamla1.Szamlaszam.Equals(szamlaszam))
+                {
+                    throw new ArgumentException(
+                        "Az adott számlaszámmal már létezik számla",
+                        "szamlaszam");
+                }
+            }
+            Szamla szamla = new Szamla(nev, szamlaszam);
+            szamlak.Add(szamla);
         }
 
         // Két számla között utal.
