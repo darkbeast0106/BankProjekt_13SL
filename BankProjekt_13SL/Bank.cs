@@ -28,7 +28,13 @@ namespace BankProjekt_13SL
         // Egy létező számlára pénzt helyez
         public void EgyenlegFeltolt(string szamlaszam, ulong osszeg)
         {
-            throw new NotImplementedException();
+            if (osszeg == 0)
+            {
+                throw new ArgumentException(
+                    "0 Forintot nem lehet feltölteni", "osszeg");
+            }
+            Szamla szamla = SzamlaKeres(szamlaszam);
+            szamla.Egyenleg += osszeg;
         }
 
         // Új számlát nyit a megadott névvel, számlaszámmal
