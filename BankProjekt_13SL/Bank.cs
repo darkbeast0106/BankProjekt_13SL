@@ -54,7 +54,8 @@ namespace BankProjekt_13SL
         }
 
         // Két számla között utal.
-        // Ha nincs elég pénz a forrás számlán, akkor
+        // Ha nincs elég pénz a forrás számlán,
+        // akkor 'false' értékkel tére vissza
         public bool Utal(string honnan, string hova, ulong osszeg)
         {
             throw new NotImplementedException();
