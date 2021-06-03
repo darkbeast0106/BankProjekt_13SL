@@ -41,5 +41,20 @@ namespace BankProjekt_13SL.Tests
             Assert.Throws<ArgumentException>(() =>
                 b.UjSzamla("Nagy Árpád", "1234"));
         }
+
+        [TestCase]
+        public void EgyenlegUjSzamlaEgyenlegNulla()
+        {
+            TesztElek1234();
+            Assert.AreEqual(0, b.Egyenleg("1234"));
+        }
+
+        [TestCase]
+        public void EgyenlegNemLetezoSzamlaszamEgyenlegeException()
+        {
+            TesztElek1234();
+            Assert.Throws<HibasSzamlaszamException>(() =>
+                b.Egyenleg("4321"));
+        }
     }
 }
