@@ -12,14 +12,17 @@ namespace BankProjekt_13SL
         {
             string nev;
             string szamlaszam;
+            ulong egyenleg;
 
             public Szamla(string nev, string szamlaszam)
             {
                 this.nev = nev;
                 this.szamlaszam = szamlaszam;
+                this.egyenleg = 0;
             }
 
             public string Szamlaszam { get => szamlaszam; }
+            public ulong Egyenleg { get => egyenleg; set => egyenleg = value; }
         }
         private List<Szamla> szamlak = new List<Szamla>();
         // Egy létező számlára pénzt helyez
@@ -54,7 +57,20 @@ namespace BankProjekt_13SL
         // Lekérdezi az adott számlán lévő pénzösszeget
         public ulong Egyenleg(string szamlaszam)
         {
-            throw new NotImplementedException();
+            Szamla szamla = SzamlaKeres(szamlaszam);
+            return szamla.Egyenleg;
+        }
+
+        private Szamla SzamlaKeres(string szamlaszam)
+        {
+            foreach (Szamla szamla in szamlak)
+            {
+                if (szamla.Szamlaszam.Equals(szamlaszam))
+                {
+                    return szamla;
+                }
+            }
+            throw new HibasSzamlaszamException(szamlaszam);
         }
     }
 
